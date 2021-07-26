@@ -4,6 +4,10 @@ import ru.isys.trainings.task3.unit1.Reflect;
 import ru.isys.trainings.task3.unit2.Printer;
 import ru.isys.trainings.task3.unit2.Student;
 import ru.isys.trainings.task3.unit3.Timer;
+import ru.isys.trainings.task3.unit4.SelectionSort;
+import ru.isys.trainings.task3.unit4.StandartSort;
+
+import java.util.Arrays;
 
 public class Main {
 
@@ -23,6 +27,14 @@ public class Main {
         printer.print(students);
 
         Timer.getSeconds();
+
+        String[] testSortArray = {"Barbara", "Nik", "Tom", "Jack", "Sandra"};
+
+        StandartSort standartSort = new StandartSort();
+        System.out.println(Arrays.toString(standartSort.sortArray(testSortArray)));
+
+        SelectionSort selectionSort = new SelectionSort();
+        System.out.println(Arrays.toString(selectionSort.sortArray(testSortArray)));
     }
 
 }
