@@ -2,6 +2,8 @@ package ru.isys.trainings.task5;
 
 import ru.isys.trainings.task5.unit1.Computer;
 import ru.isys.trainings.task5.unit2.Airline;
+import ru.isys.trainings.task5.unit3.ArrayTransform;
+import ru.isys.trainings.task5.unit3.exception.WrongArrayDataException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -21,14 +23,25 @@ public class Main {
         airline.setFlightTime(LocalDateTime.now().toLocalTime());
         airline.setDaysOfWeeks(new DayOfWeek[]{DayOfWeek.MONDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY});
 
-        System.out.println(
-                airline.getFlightNumber() + " " +
+        System.out.println(airline.getFlightNumber() + " " +
                 airline.getAirlineType().getDescription() + " " +
                 airline.getFlightTime() + " " +
                 Arrays.toString(airline.getDaysOfWeeks()) + " " +
-                airline.getDestination()
-        );
+                airline.getDestination());
 
+        try {
+
+            ArrayTransform.transform(
+                    new String[][]{
+                            {"1", "sadf", "sadf", "safd"},
+                            {"asd", "sadf", "sadf", "safd"},
+                            {"asd", "sadf", "sadf", "safd"},
+                            {"asd", "sadf", "sadf", "safd"}
+                    });
+
+        } catch (WrongArrayDataException e) {
+            e.printStackTrace();
+        }
     }
 
 }
