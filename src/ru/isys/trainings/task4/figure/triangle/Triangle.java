@@ -1,8 +1,11 @@
 package ru.isys.trainings.task4.figure.triangle;
 
 import ru.isys.trainings.task4.figure.Figure;
+import java.util.Comparator;
 
-public abstract class Triangle implements Figure {
+public abstract class Triangle implements Figure, Comparable<Triangle> {
+
+    public static TriangleSort triangleSort;
 
     private double weight;
     private double height;
@@ -13,6 +16,16 @@ public abstract class Triangle implements Figure {
         this.weight = weight;
         this.height = height;
         this.alpha = (alpha * Math.PI / 180);
+        triangleSort = new TriangleSort();
+    }
+
+    public static class TriangleSort implements Comparator<Triangle> {
+
+        @Override
+        public int compare(Triangle triangle1, Triangle triangle2) {
+            return Double.compare(triangle1.getSquare(), triangle2.getSquare());
+        }
+
     }
 
     @Override
@@ -54,5 +67,10 @@ public abstract class Triangle implements Figure {
                 ", height=" + height +
                 ", alpha=" + alpha +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Triangle triangle) {
+        return Double.compare(this.getPerimeter(), triangle.getPerimeter());
     }
 }

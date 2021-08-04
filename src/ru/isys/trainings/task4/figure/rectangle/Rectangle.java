@@ -2,7 +2,7 @@ package ru.isys.trainings.task4.figure.rectangle;
 
 import ru.isys.trainings.task4.figure.Figure;
 
-public class Rectangle implements Figure {
+public class Rectangle implements Figure, Comparable<Rectangle> {
 
     private double weight;
     private double height;
@@ -44,5 +44,10 @@ public class Rectangle implements Figure {
                 "weight=" + weight +
                 ", height=" + height +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Rectangle rectangle) {
+        return Double.compare(this.getSquare(), rectangle.getSquare());
     }
 }
