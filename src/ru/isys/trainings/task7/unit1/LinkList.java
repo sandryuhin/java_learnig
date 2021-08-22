@@ -97,6 +97,19 @@ public class LinkList<E> implements Iterable<E> {
         size++;
     }
 
+    public void clear() {
+        if (head == null) {
+            return;
+        }
+
+        ListItem<E> item = head;
+        while (item.next != null) {
+            item = item.next;
+        }
+
+        System.gc();
+    }
+
     @Override
     public Iterator<E> iterator() {
         return new LinkIterator(head);
