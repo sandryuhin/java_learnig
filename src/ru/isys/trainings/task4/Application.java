@@ -6,10 +6,7 @@ import ru.isys.trainings.task4.figure.triangle.EquilateralTriangle;
 import ru.isys.trainings.task4.figure.triangle.RectTriangle;
 import ru.isys.trainings.task4.figure.triangle.Triangle;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class Application {
 
@@ -70,6 +67,41 @@ public class Application {
 
         System.out.println(Triangle.triangleSort.compare(triangle1, triangle2));
 
+        Map<Double, Triangle> triangles = new TreeMap<>();
+
+        Double rectTrianglePerimeter = rectTriangle.getPerimeter();
+        Double equilateralTrianglePerimeter = equilateralTriangle.getPerimeter();
+
+        triangles.put(rectTrianglePerimeter, rectTriangle);
+        triangles.put(equilateralTrianglePerimeter, equilateralTriangle);
+
+        for (Map.Entry<Double, Triangle> entry : triangles.entrySet()) {
+            System.out.println("Perimeter: " + entry.getKey() + ", triangle info: " + entry.getValue());
+        }
     }
+
+//    private static void checkRuntime() {
+//        Map treeMap = new TreeMap();
+//
+//        for (int i = 0; i < 10; i++) {
+//            treeMap.put(i, Application.getRandomString(10));
+//        }
+//
+//        System.out.println(treeMap);
+//
+//    }
+//
+//    public static String getRandomString(int len) {
+//        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//        StringBuilder b = new StringBuilder();
+//
+//        for (int i = 0; i < len; i++) {
+//            int randIdx = new Random().nextInt(alphabet.length());
+//            char randChar = alphabet.charAt(randIdx);
+//            b.append(randChar);
+//        }
+//
+//        return b.toString();
+//    }
 
 }
