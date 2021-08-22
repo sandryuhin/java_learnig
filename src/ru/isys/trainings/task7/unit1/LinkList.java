@@ -107,6 +107,7 @@ public class LinkList<E> implements Iterable<E> {
             item = item.next;
         }
 
+        head = null;
         System.gc();
     }
 
