@@ -47,6 +47,54 @@ public class LinkList<E> implements Iterable<E> {
 
     }
 
+    public E get(int index) throws NoSuchElementException {
+        if (index < 0 || index > size) {
+            throw new NoSuchElementException();
+        }
+
+        if (index == 0) {
+            return head.data;
+        }
+
+        int currentIndex = 0;
+        ListItem<E> item = head;
+        while (item != null) {
+            if (currentIndex == index) {
+                return item.data;
+            }
+
+            item = item.next;
+            currentIndex++;
+        }
+
+        throw new NoSuchElementException();
+    }
+
+    public void set(int index, E element) throws NoSuchElementException {
+        if (index < 0 || index > size) {
+            throw new NoSuchElementException();
+        }
+
+        if (index == 0) {
+            head.data = element;
+            return;
+        }
+
+        int currentIndex = 0;
+        ListItem<E> item = head;
+        while (item.next != null) {
+            if (currentIndex == index) {
+                item.data = element;
+                return;
+            }
+
+            item = item.next;
+            currentIndex++;
+        }
+
+        throw new NoSuchElementException();
+    }
+
     public void add(int index, E element) throws NoSuchElementException {
         if (index < 0 || index > size + 1) {
             throw new NoSuchElementException();
@@ -97,6 +145,35 @@ public class LinkList<E> implements Iterable<E> {
         size++;
     }
 
+    public void remove(int index) throws NoSuchElementException {
+        if (index < 0 || index > size + 1) {
+            throw new NoSuchElementException();
+        }
+
+        if (index == 0) {
+            head = head.next;
+            System.gc();
+            return;
+        }
+
+        int currentIndex = 0;
+        ListItem<E> item = head;
+        ListItem<E> prevItem = null;
+        while (item.next != null) {
+            if (currentIndex == index) {
+                prevItem.next = item.next;
+                System.gc();
+                return;
+            }
+
+            prevItem = item;
+            item = item.next;
+            currentIndex++;
+        }
+
+        size--;
+    }
+
     public void clear() {
         if (head == null) {
             return;
@@ -108,6 +185,7 @@ public class LinkList<E> implements Iterable<E> {
         }
 
         head = null;
+        size = 0;
         System.gc();
     }
 
