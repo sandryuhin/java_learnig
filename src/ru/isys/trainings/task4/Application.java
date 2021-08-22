@@ -42,7 +42,7 @@ public class Application {
         System.out.println(equilateralTriangle.getPerimeter());
         System.out.println(equilateralTriangle.getSquare());
 
-        // task6
+        // task6 unit1
         List<Rectangle> rectangleList = new ArrayList<>();
         rectangleList.add(new Rectangle(30, 40));
         rectangleList.add(new Rectangle(40, 50));
@@ -79,29 +79,5 @@ public class Application {
             System.out.println("Perimeter: " + entry.getKey() + ", triangle info: " + entry.getValue());
         }
     }
-
-//    private static void checkRuntime() {
-//        Map treeMap = new TreeMap();
-//
-//        for (int i = 0; i < 10; i++) {
-//            treeMap.put(i, Application.getRandomString(10));
-//        }
-//
-//        System.out.println(treeMap);
-//
-//    }
-//
-//    public static String getRandomString(int len) {
-//        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//        StringBuilder b = new StringBuilder();
-//
-//        for (int i = 0; i < len; i++) {
-//            int randIdx = new Random().nextInt(alphabet.length());
-//            char randChar = alphabet.charAt(randIdx);
-//            b.append(randChar);
-//        }
-//
-//        return b.toString();
-//    }
 
 }
