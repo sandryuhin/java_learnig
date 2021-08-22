@@ -9,9 +9,9 @@ import java.util.List;
 public class Main {
 
     /**
-     * task6 unit 1 находится в task4 в главном классе
+     * task6 unit1 находится в task4 в главном классе
      * @see ru.isys.trainings.task4.Application
-     * */
+     */
     public static void main(String[] args) {
 
         // unit2
