@@ -152,6 +152,7 @@ public class LinkList<E> implements Iterable<E> {
 
         if (index == 0) {
             head = head.next;
+            size--;
             System.gc();
             return;
         }
@@ -162,6 +163,7 @@ public class LinkList<E> implements Iterable<E> {
         while (item.next != null) {
             if (currentIndex == index) {
                 prevItem.next = item.next;
+                size--;
                 System.gc();
                 return;
             }
@@ -170,8 +172,6 @@ public class LinkList<E> implements Iterable<E> {
             item = item.next;
             currentIndex++;
         }
-
-        size--;
     }
 
     public void clear() {
