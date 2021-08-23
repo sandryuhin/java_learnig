@@ -11,14 +11,22 @@ public class HashedMap<K, V> {
     private final int defaultBucketCapacity = 16;
     private final List<LinkList<MapItem<K, V>>> buckets;
 
-    private static class MapItem<K, V> {
+    public static class MapItem<K, V> {
 
-        K key;
-        V value;
+        private final K key;
+        private final V value;
 
         public MapItem(K key, V value) {
             this.key = key;
             this.value = value;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
         }
 
     }
@@ -35,17 +43,29 @@ public class HashedMap<K, V> {
         this.buckets = new ArrayList<>(capacity);
     }
 
-    public void put(K key, V value) throws IndexOutOfBoundsException, NoSuchElementException {
-        int hashOfKey = key.hashCode();
-        int keyOfBucket = Math.abs(hashOfKey % 16) - 1;
+    public MapItem<K, V> get(K key) {
+        int keyOfBucket = getKeyOfBucket(key);
+        return buckets.get(keyOfBucket).get(0);
+    }
+
+    public void put(K key, V value) throws IndexOutOfBoundsException, NoSuchElementException, NullPointerException {
+        int keyOfBucket = getKeyOfBucket(key);
 
         MapItem<K, V> newItem = new MapItem<>(key, value);
 
         if (buckets.get(keyOfBucket) == null) {
-            buckets.get(keyOfBucket).set(keyOfBucket, newItem);
+            buckets.get(keyOfBucket).set(0, newItem);
         } else {
-            buckets.get(keyOfBucket).add(keyOfBucket, newItem);
+            buckets.get(keyOfBucket).add(0, newItem);
         }
+    }
+
+    private int getKeyOfBucket(K key) {
+        if (key == null) {
+            throw new NullPointerException("Can't get hashcode from key of null");
+        }
+
+        return Math.abs(key.hashCode() % 16) - 1;
     }
 
     private LinkList<MapItem<K, V>> setDefaultValuesInBucket() {
