@@ -12,7 +12,10 @@ public class Main {
         linkList.add("test2");
         linkList.add("test3");
 
-        System.out.println(linkList.get(1));
+        for (String llValue : linkList) {
+            System.out.println(llValue);
+        }
+
     }
 
 }

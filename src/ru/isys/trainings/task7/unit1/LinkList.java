@@ -52,10 +52,6 @@ public class LinkList<E> implements Iterable<E> {
             throw new NoSuchElementException();
         }
 
-        if (index == 0) {
-            return head.data;
-        }
-
         int currentIndex = 0;
         ListItem<E> item = head;
         while (item != null) {
@@ -73,11 +69,6 @@ public class LinkList<E> implements Iterable<E> {
     public void set(int index, E element) throws NoSuchElementException {
         if (index < 0 || index > size) {
             throw new NoSuchElementException();
-        }
-
-        if (index == 0) {
-            head.data = element;
-            return;
         }
 
         int currentIndex = 0;
@@ -110,6 +101,7 @@ public class LinkList<E> implements Iterable<E> {
         if (index == 0) {
             head = newItem;
             newItem.next = item;
+            size++;
             return;
         }
 
@@ -119,6 +111,7 @@ public class LinkList<E> implements Iterable<E> {
                 ListItem<E> nextItem = item.next;
                 item.next = newItem;
                 newItem.next = nextItem;
+                size++;
                 break;
             }
 
