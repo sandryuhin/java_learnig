@@ -76,6 +76,19 @@ public class Main {
 //            System.out.println(key + " => " + value);
 //        });
 
+        // что-то хрень получилась, франкинштейн какой-то, не получился TreeMap или так и должно быть, хз
+        Map<Object, List<Map.Entry<String, Integer>>> sortedGroupingMap = namesMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.groupingBy(Map.Entry::getValue));
+
+//        sortedGroupingMap.forEach((key, value) -> {
+//            System.out.println(key);
+//            value.forEach(item -> {
+//                System.out.println(item.getKey());
+//            });
+//        });
+
+
 
 
     }
