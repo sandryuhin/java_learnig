@@ -47,7 +47,7 @@ public class LinkList<E> implements Iterable<E> {
 
     }
 
-    public E get(int index) throws NoSuchElementException {
+    public E get(long index) throws NoSuchElementException {
         if (index < 0 || index > size) {
             throw new NoSuchElementException();
         }
@@ -66,7 +66,7 @@ public class LinkList<E> implements Iterable<E> {
         throw new NoSuchElementException();
     }
 
-    public void set(int index, E element) throws NoSuchElementException {
+    public void set(long index, E element) throws NoSuchElementException {
         if (index < 0 || index > size) {
             throw new NoSuchElementException();
         }
@@ -86,7 +86,7 @@ public class LinkList<E> implements Iterable<E> {
         throw new NoSuchElementException();
     }
 
-    public void add(int index, E element) throws NoSuchElementException {
+    public void add(long index, E element) throws NoSuchElementException {
         if (index < 0 || index > size + 1) {
             throw new NoSuchElementException();
         }
@@ -138,7 +138,7 @@ public class LinkList<E> implements Iterable<E> {
         size++;
     }
 
-    public void remove(int index) throws NoSuchElementException {
+    public void remove(long index) throws NoSuchElementException {
         if (index < 0 || index > size + 1) {
             throw new NoSuchElementException();
         }

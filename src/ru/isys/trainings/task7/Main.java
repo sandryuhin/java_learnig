@@ -24,13 +24,15 @@ public class Main {
         String key1 = "lalala";
         String val1 = "nanana";
         String key2 = "lalalab";
-        String val2 = "nanana";
+        String val2 = "nanana2";
 
         stringHashedMap.put(key1, val1);
         stringHashedMap.put(key2, val2);
         System.out.println(stringHashedMap.get(key1).getValue());
         System.out.println(stringHashedMap.get(key2).getValue());
 
+        System.out.println(stringHashedMap.constraintsKey("xcxcxc"));
+        System.out.println(stringHashedMap.constraintsValue(val1));
     }
 
 }

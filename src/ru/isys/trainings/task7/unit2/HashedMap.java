@@ -9,12 +9,13 @@ import java.util.NoSuchElementException;
 public class HashedMap<K, V> {
 
     private final int defaultBucketCapacity = 16;
-    private final List<LinkList<MapItem<K, V>>> buckets;
+    private int size = 0;
+    private List<LinkList<MapItem<K, V>>> buckets;
 
     public static class MapItem<K, V> {
 
         private final K key;
-        private final V value;
+        private V value;
 
         public MapItem(K key, V value) {
             this.key = key;
@@ -32,50 +33,136 @@ public class HashedMap<K, V> {
     }
 
     public HashedMap() {
-        this.buckets = new ArrayList<>(defaultBucketCapacity);
-
-        for (int index = 0; index < defaultBucketCapacity; index++) {
-            buckets.add(index, setDefaultValuesInBucket());
-        }
+        buckets = new ArrayList<>(defaultBucketCapacity);
+        setDefaultValuesInBucket();
+        size = defaultBucketCapacity;
     }
 
     public HashedMap(int capacity) {
-        this.buckets = new ArrayList<>(capacity);
+        buckets = new ArrayList<>(capacity);
+        setDefaultValuesInBucket();
+        size = capacity;
     }
 
-    public MapItem<K, V> get(K key) {
-        int keyOfBucket = getKeyOfBucket(key);
-        return buckets.get(keyOfBucket).get(0);
+    public boolean constraintsValue(V value) {
+        for (LinkList<MapItem<K, V>> bucket : buckets) {
+            if (getBucketItemValue(value, bucket) != null) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    public void put(K key, V value) throws IndexOutOfBoundsException, NoSuchElementException, NullPointerException {
-        int keyOfBucket = getKeyOfBucket(key);
+    public boolean constraintsKey(K key) {
+        try {
+            int keyOfBucket = getKeyOfBucket(key);
+            LinkList<MapItem<K, V>> bucket = buckets.get(keyOfBucket);
+            getBucketItemIndex(key, bucket);
 
-        MapItem<K, V> newItem = new MapItem<>(key, value);
-
-        if (buckets.get(keyOfBucket) == null) {
-            buckets.get(keyOfBucket).set(0, newItem);
-        } else {
-            buckets.get(keyOfBucket).add(0, newItem);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
         }
     }
 
-    private int getKeyOfBucket(K key) {
+    public void remove(K key) {
+        int keyOfBucket = getKeyOfBucket(key);
+        LinkList<MapItem<K, V>> bucket = buckets.get(keyOfBucket);
+        bucket.remove(getBucketItemIndex(key, bucket));
+    }
+
+    public MapItem<K, V> get(K key) throws NoSuchElementException {
+        int keyOfBucket = getKeyOfBucket(key);
+        return searchBucketItem(key, buckets.get(keyOfBucket));
+    }
+
+    public void put(K key, V value) throws IndexOutOfBoundsException, NullPointerException {
+        int keyOfBucket = getKeyOfBucket(key);
+        setBucketItem(buckets.get(keyOfBucket), new MapItem<>(key, value));
+    }
+
+    public void clear() {
+        for (LinkList<MapItem<K, V>> bucket : buckets) {
+            bucket.clear();
+        }
+    }
+
+    public boolean isEmpty() {
+        for (LinkList<MapItem<K, V>> bucket : buckets) {
+            if (!bucket.isEmpty()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    private void setBucketItem(LinkList<MapItem<K, V>> bucket, MapItem<K, V> newItem) {
+        long currentBucketSize = bucket.getSize();
+
+        if (currentBucketSize == 0) {
+            bucket.add(newItem);
+            return;
+        }
+
+        try {
+            MapItem<K, V> item = searchBucketItem(newItem.getKey(), bucket);
+            item.value = newItem.value;
+        } catch (NoSuchElementException e) {
+            bucket.add(newItem);
+        }
+    }
+
+    private V getBucketItemValue(V value, LinkList<MapItem<K, V>> bucket) {
+        for (MapItem<K, V> item : bucket) {
+            if (item.getValue().equals(value)) {
+                return item.getValue();
+            }
+        }
+
+        return null;
+    }
+
+    private long getBucketItemIndex(K key, LinkList<MapItem<K, V>> bucket) {
+        long itemIndex = 0;
+
+        for (MapItem<K, V> item : bucket) {
+            if (item.getKey().equals(key)) {
+                return itemIndex;
+            }
+
+            itemIndex++;
+        }
+
+        throw new NoSuchElementException();
+    }
+
+    private MapItem<K, V> searchBucketItem(K key, LinkList<MapItem<K, V>> bucket) throws NoSuchElementException {
+        for (MapItem<K, V> item : bucket) {
+            if (item.getKey().equals(key)) {
+                return item;
+            }
+        }
+
+        throw new NoSuchElementException();
+    }
+
+    private int getKeyOfBucket(K key) throws NullPointerException {
         if (key == null) {
             throw new NullPointerException("Can't get hashcode from key of null");
         }
 
-        return Math.abs(key.hashCode() % 16) - 1;
+        return Math.abs(key.hashCode() % 16);
     }
 
-    private LinkList<MapItem<K, V>> setDefaultValuesInBucket() {
-        LinkList<MapItem<K, V>> defaultList = new LinkList<>();
-
+    private void setDefaultValuesInBucket() {
         for (int index = 0; index < defaultBucketCapacity; index++) {
-            defaultList.add(null);
+            buckets.add(new LinkList<>());
         }
-
-        return defaultList;
     }
-
 }
