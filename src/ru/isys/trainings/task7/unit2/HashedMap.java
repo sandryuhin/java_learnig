@@ -8,8 +8,10 @@ import java.util.NoSuchElementException;
 
 public class HashedMap<K, V> {
 
-    private final int defaultBucketCapacity = 16;
-    private int size = 0;
+    private static final int DEFAULT_BUCKET_CAPACITY = 16;
+    private final int CAPACITY;
+    private int size;
+
     private List<LinkList<MapItem<K, V>>> buckets;
 
     public static class MapItem<K, V> {
@@ -33,15 +35,13 @@ public class HashedMap<K, V> {
     }
 
     public HashedMap() {
-        buckets = new ArrayList<>(defaultBucketCapacity);
-        setDefaultValuesInBucket();
-        size = defaultBucketCapacity;
+        this(DEFAULT_BUCKET_CAPACITY);
     }
 
     public HashedMap(int capacity) {
-        buckets = new ArrayList<>(capacity);
+        CAPACITY = capacity;
+        buckets = new ArrayList<>(CAPACITY);
         setDefaultValuesInBucket();
-        size = capacity;
     }
 
     public boolean constraintsValue(V value) {
@@ -70,6 +70,8 @@ public class HashedMap<K, V> {
         int keyOfBucket = getKeyOfBucket(key);
         LinkList<MapItem<K, V>> bucket = buckets.get(keyOfBucket);
         bucket.remove(getBucketItemIndex(key, bucket));
+
+        size--;
     }
 
     public MapItem<K, V> get(K key) throws NoSuchElementException {
@@ -80,6 +82,8 @@ public class HashedMap<K, V> {
     public void put(K key, V value) throws IndexOutOfBoundsException, NullPointerException {
         int keyOfBucket = getKeyOfBucket(key);
         setBucketItem(buckets.get(keyOfBucket), new MapItem<>(key, value));
+
+        size++;
     }
 
     public void clear() {
@@ -161,7 +165,7 @@ public class HashedMap<K, V> {
     }
 
     private void setDefaultValuesInBucket() {
-        for (int index = 0; index < defaultBucketCapacity; index++) {
+        for (int index = 0; index < CAPACITY; index++) {
             buckets.add(new LinkList<>());
         }
     }

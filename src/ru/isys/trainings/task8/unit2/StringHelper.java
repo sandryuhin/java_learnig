@@ -1,6 +1,7 @@
 package ru.isys.trainings.task8.unit2;
 
 import java.util.Locale;
+import java.util.Map;
 
 public class StringHelper {
 
@@ -19,5 +20,11 @@ public class StringHelper {
 
         return counter;
     }
+
+//    public static Map<String, Integer> getSortedAndGroupingMap(Map<String, Integer> map) {
+//
+//
+//
+//    }
 
 }

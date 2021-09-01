@@ -27,8 +27,13 @@ public class Main {
         String val2 = "nanana2";
 
         stringHashedMap.put(key1, val1);
+        System.out.println(stringHashedMap.getSize());
         stringHashedMap.put(key2, val2);
+        System.out.println(stringHashedMap.getSize());
         System.out.println(stringHashedMap.get(key1).getValue());
+        System.out.println(stringHashedMap.get(key2).getValue());
+        stringHashedMap.remove(key1);
+        System.out.println(stringHashedMap.getSize());
         System.out.println(stringHashedMap.get(key2).getValue());
 
         System.out.println(stringHashedMap.constraintsKey("xcxcxc"));
