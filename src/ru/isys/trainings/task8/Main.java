@@ -3,9 +3,7 @@ package ru.isys.trainings.task8;
 import ru.isys.trainings.task8.unit1.WomenNames;
 import ru.isys.trainings.task8.unit2.StringHelper;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,9 +16,9 @@ public class Main {
         String names = wn.getNames();
 
         List<String> namesList = Stream.of(names.split("\n"))
-                .filter(item -> !item.equals("") && item.lastIndexOf("Имена для девочки на букву") == -1)
+                .filter(item -> !item.equals("") && !item.startsWith("Имена для девочки на букву"))
                 .map(item -> item.replaceAll(" .*", ""))
-                .sorted(Comparator.reverseOrder())
+                .sorted(Comparator.naturalOrder())
                 .collect(Collectors.toList());
 
 //        namesList.forEach(System.out::println);
@@ -57,7 +55,7 @@ public class Main {
 //        System.out.println(shortName);
 
         String nameHas_YEEEEE = namesList.stream()
-                .filter(item -> item.indexOf("Е") == 0)
+                .filter(item -> item.startsWith("Е"))
                 .findFirst()
                 .orElse(null);
 
@@ -76,20 +74,29 @@ public class Main {
 //            System.out.println(key + " => " + value);
 //        });
 
-        // что-то хрень получилась, франкинштейн какой-то, не получился TreeMap или так и должно быть, хз
-        Map<Object, List<Map.Entry<String, Integer>>> sortedGroupingMap = namesMap.entrySet().stream()
+        Map<Integer, List<Map.Entry<String, Integer>>> sortedGroupingMap = namesMap.entrySet().stream()
                 .sorted(Map.Entry.comparingByValue())
-                .collect(Collectors.groupingBy(Map.Entry::getValue));
+                .collect(Collectors.groupingBy(Map.Entry::getValue, TreeMap::new, Collectors.toList()));
 
 //        sortedGroupingMap.forEach((key, value) -> {
 //            System.out.println(key);
-//            value.forEach(item -> {
-//                System.out.println(item.getKey());
-//            });
+//            value.forEach(item -> System.out.println(item.getKey()));
 //        });
 
+        TreeMap<Integer, List<String>> newSortedGroupingMap = new TreeMap<>();
+        namesMap.forEach((value, key) -> {
+            if (!newSortedGroupingMap.containsKey(key)) {
+                newSortedGroupingMap.put(key, new ArrayList<>());
+            }
 
+            List<String> listItem = newSortedGroupingMap.get(key);
+            listItem.add(value);
+        });
 
+//        newSortedGroupingMap.forEach((key, value) -> {
+//            System.out.println(key);
+//            value.forEach(System.out::println);
+//        });
 
     }
 
