@@ -98,6 +98,11 @@ public class Main {
 //            value.forEach(System.out::println);
 //        });
 
+        Map<Boolean, List<String>> separatedNames = namesList.stream()
+                .collect(Collectors.partitioningBy(StringHelper::isVowel, Collectors.toList()));
+
+        separatedNames.forEach((key, value) -> System.out.println(key + " " + value));
+
     }
 
 }
