@@ -34,7 +34,7 @@ public class Main {
         albums.add(new Album("SecondSong", "Rock", songsPack2));
 
         List<Singer> singers = new ArrayList<>();
-        singers.add(new Singer("Bob", (byte) 35, Singer.Sex.MALE, albums));
+        singers.add(new Singer("Bob", albums));
 
         Sorter.sortByGenre(singers, "Pop").forEach(System.out::println);
         Sorter.sortByAlbumCount(singers, 1).forEach(System.out::println);
