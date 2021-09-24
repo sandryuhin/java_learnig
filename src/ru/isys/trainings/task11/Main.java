@@ -4,6 +4,8 @@ import ru.isys.trainings.task11.unit1.Album;
 import ru.isys.trainings.task11.unit1.Singer;
 import ru.isys.trainings.task11.unit1.Song;
 import ru.isys.trainings.task11.unit1.Sorter;
+import ru.isys.trainings.task11.unit2.factory.SingerFileDaoFactory;
+import ru.isys.trainings.task11.unit2.factory.SingerJdbcDaoFactory;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -36,6 +38,9 @@ public class Main {
 
         Sorter.sortByGenre(singers, "Pop").forEach(System.out::println);
         Sorter.sortByAlbumCount(singers, 1).forEach(System.out::println);
+
+        System.out.println(SingerFileDaoFactory.getInstance().createSingerDao());
+        System.out.println(SingerJdbcDaoFactory.getInstance().createSingerDao());
 
     }
 
