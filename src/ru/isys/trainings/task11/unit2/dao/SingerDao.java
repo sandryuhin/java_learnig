@@ -4,25 +4,10 @@ import ru.isys.trainings.task11.unit1.Singer;
 
 import java.util.List;
 
-class SingerFactory extends Dao<Integer, Singer> implements Stubbier {
-    @Override
-    public List<Singer> getAll() {
-        subDao(SingerFactory.class, "getAll");
-        return null;
-    }
+public interface SingerDao {
 
-    @Override
-    public void insert(Singer entity) {
-        subDao(SingerFactory.class, "insert");
-    }
+    public List<Singer> findSingers();
 
-    @Override
-    public void update(Integer id, Singer entity) {
-        subDao(SingerFactory.class, "update");
-    }
+    public void saveSingers(List<Singer> singers);
 
-    @Override
-    public void delete(Integer id) {
-        subDao(SingerFactory.class, "delete");
-    }
 }
