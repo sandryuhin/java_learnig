@@ -1,0 +1,24 @@
+Singer: Singer1
+   Album: AlbumName1, Genre1
+       Song: SongName1, 100
+       Song: SongName2, 200
+       Song: SongName3, 300
+   Album: AlbumName2, Genre2
+       Song: SongName4, 400
+       Song: SongName5, 500
+       Song: SongName6, 600
+       Song: SongName7, 700
+Singer: Singer2
+   Album: AlbumName1, Genre1
+       Song: SongName1, 100
+       Song: SongName2, 200
+       Song: SongName3, 300
+       Song: SongName1, 100
+       Song: SongName2, 200
+       Song: SongName3, 300
+   Album: AlbumName4, Genre1
+       Song: SongName4, 400
+       Song: SongName5, 500
+       Song: SongName6, 600
+       Song: SongName7, 700
+       Song: SongName8, 800

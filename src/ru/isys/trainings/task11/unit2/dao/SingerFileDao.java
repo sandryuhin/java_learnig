@@ -11,9 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class SingerFileDao implements SingerDao {
     @Override
@@ -59,7 +61,16 @@ public class SingerFileDao implements SingerDao {
     }
 
     @Override
-    public void saveSingers(List<Singer> singers) {
+    public void saveSingers(List<Singer> singers) throws IOException {
 //        Stubbier.subDao(SingerFileDao.class, "saveSingers"); task11
+
+        List<String> stringList = singers.stream().map(Singer::toString).collect(Collectors.toList());
+
+        Path filePath = Paths.get("D:\\Projects\\java\\learning\\task1\\src\\ru\\isys\\trainings\\task12\\filtered_singers.txt");
+        if (Files.notExists(filePath)) {
+            Files.createFile(filePath);
+        }
+
+        Files.write(filePath, stringList, StandardCharsets.UTF_8, StandardOpenOption.APPEND);
     }
 }

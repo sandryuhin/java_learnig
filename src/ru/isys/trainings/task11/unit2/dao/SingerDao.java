@@ -9,6 +9,6 @@ public interface SingerDao {
 
     List<Singer> findSingers() throws IOException;
 
-    void saveSingers(List<Singer> singers);
+    void saveSingers(List<Singer> singers) throws IOException;
 
 }
