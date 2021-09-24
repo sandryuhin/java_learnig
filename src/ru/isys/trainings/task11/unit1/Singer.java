@@ -30,8 +30,12 @@ public class Singer {
 
     @Override
     public String toString() {
-        return "Singer{" +
-                "name='" + name + '\'' +
-                '}';
+        StringBuilder output = new StringBuilder("Singer: " + name);
+
+        for (Album album : getAlbums()) {
+            output.append("\n   ").append(album.toString());
+        }
+
+        return output.toString();
     }
 }

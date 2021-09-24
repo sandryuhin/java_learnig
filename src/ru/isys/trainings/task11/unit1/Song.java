@@ -27,4 +27,9 @@ public class Song {
     public void setDuration(Duration duration) {
         this.duration = duration;
     }
+
+    @Override
+    public String toString() {
+        return "Song: " + name + ", " + duration.getSeconds();
+    }
 }

@@ -37,4 +37,15 @@ public class Album {
     public void setSongs(List<Song> songs) {
         this.songs = songs;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder output = new StringBuilder("Album: " + name + ", " + genre);
+
+        for (Song song : getSongs()) {
+            output.append("\n       ").append(song.toString());
+        }
+
+        return output.toString();
+    }
 }
