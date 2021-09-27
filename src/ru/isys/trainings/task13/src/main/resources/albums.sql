@@ -7,7 +7,7 @@ create table albums
     genre int
         constraint genre___fk
             references genres,
-    songs int
-        constraint songs___fk
-            references songs
+    singer int
+        constraint singer___fk
+            references singers
 );

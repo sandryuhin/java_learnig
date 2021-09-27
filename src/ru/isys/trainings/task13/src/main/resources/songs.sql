@@ -4,5 +4,8 @@ create table songs
         constraint songs_pk
             primary key,
     name varchar not null,
-    duration int not null
+    duration int not null,
+    album int
+        constraint genre___fk
+            references albums
 );
