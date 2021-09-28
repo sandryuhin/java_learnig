@@ -1,3 +1,5 @@
+package ru.isys.trainings.task13.src.main.java;
+
 import entity.Singer;
 
 import java.util.List;

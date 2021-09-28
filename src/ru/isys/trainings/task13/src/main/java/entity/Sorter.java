@@ -1,4 +1,4 @@
-package entity;
+package ru.isys.trainings.task13.src.main.java.entity;
 
 import java.util.List;
 import java.util.stream.Collectors;

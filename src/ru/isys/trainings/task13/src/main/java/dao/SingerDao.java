@@ -1,4 +1,4 @@
-package dao;
+package ru.isys.trainings.task13.src.main.java.dao;
 
 import entity.Singer;
 

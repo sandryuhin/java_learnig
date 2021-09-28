@@ -1,4 +1,4 @@
-package factory;
+package ru.isys.trainings.task13.src.main.java.factory;
 
 import dao.SingerJdbcDao;
 
